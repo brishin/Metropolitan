@@ -7,7 +7,7 @@ itep-subway
 # Running
 ### iOS
 ```
-ionic platform add ios
+npm install -g ios-deploy ios-sim
 ionic build ios
 ionic emulate ios
 ```
