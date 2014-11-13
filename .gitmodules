@@ -1,0 +1,3 @@
+[submodule "MtaSanitizer"]
+	path = MtaSanitizer
+	url = https://github.com/jonthornton/MtaSanitizer.git

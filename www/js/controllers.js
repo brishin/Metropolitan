@@ -1,8 +1,10 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, subwayStops) {
   $scope.currentPosition = {};
   $scope.prettyPrintPosition = '';
+  $scope.subwayLines = Object.keys(subwayStops);
+  $scope.selectedLine = $scope.subwayLines[0];
 
   navigator.geolocation.getCurrentPosition(function(position) {
     $scope.currentPosition = position;
@@ -17,6 +19,10 @@ angular.module('starter.controllers', [])
     }
 
     $scope.prettyPrintPosition = newPosition.coords.latitude + ", " + newPosition.coords.longitude;
+  });
+
+  $scope.$watch('selectedLine', function(newLine) {
+    $scope.activeStops = subwayStops[$scope.selectedLine];
   });
 })
 

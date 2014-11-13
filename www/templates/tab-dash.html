@@ -1,5 +1,21 @@
 <ion-view title="Metropolitan">
   <ion-content class="padding">
     <h1>Location: {{prettyPrintPosition}}</h1>
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Subway Line
+        </div>
+        <select ng-model="$parent.selectedLine">
+          <option ng-repeat="line in subwayLines" ng-value="line">{{line}}</option>
+        </select>
+      </label>
+    </div>
+
+    <ul class="list">
+      <li class="item" ng-repeat="stop in activeStops">
+        {{stop.name}}
+      </li>
+    </ul>
   </ion-content>
 </ion-view>
