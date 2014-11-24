@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('starter.services', ['firebase'])
 
 /**
  * A simple example service that returns some data.
@@ -23,6 +23,49 @@ angular.module('starter.services', [])
       return friends[friendId];
     }
   };
+})
+
+.factory('Locator', function() {
+  var Locator = function() {};
+  Locator._initComplete = false;
+  Locator._lastPosition = null;
+
+  Locator.prototype = EventEmitter.prototype;
+
+  Locator.prototype.init = function() {
+    if (this._initComplete) {
+      return;
+    }
+
+    if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+      document.addEventListener("deviceready", this._doInit, false);
+    } else {
+      this._doInit();
+    }
+  };
+
+  // Actually runs the init code after the device is ready
+  Locator.prototype._doInit = function() {
+    var that = this;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      that._updatePosition(position);
+      that._initComplete = true;
+    }, function(error) {
+      that._handleLocationError(error);
+    });
+  };
+
+  Locator.prototype._handleLocationError = function(error) {
+    alert('Geolocation error', error);
+  };
+
+  Locator.prototype._updatePosition = function(newPosition) {
+    this._lastPosition = newPosition;
+    console.log('positionUpdated :' + newPosition);
+    this.emitEvent('positionUpdated', [newPosition]);
+  };
+
+  return new Locator();
 })
 
 .value('subwayStops',

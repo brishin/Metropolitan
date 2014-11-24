@@ -12,10 +12,10 @@
       </label>
     </div>
 
-    <ul class="list">
-      <li class="item" ng-repeat="stop in activeStops">
+    <div class="list">
+      <a class="item" ng-repeat="stop in activeStops" href="#" ng-click="stopTapped(stop)">
         {{stop.name}}
-      </li>
-    </ul>
+      </a>
+    </div>
   </ion-content>
 </ion-view>

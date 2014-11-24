@@ -1,17 +1,16 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, subwayStops) {
+.controller('DashCtrl', function($scope, subwayStops, Locator) {
   $scope.currentPosition = {};
   $scope.prettyPrintPosition = '';
   $scope.subwayLines = Object.keys(subwayStops);
   $scope.selectedLine = $scope.subwayLines[0];
 
-  navigator.geolocation.getCurrentPosition(function(position) {
-    $scope.currentPosition = position;
+  Locator.on('positionUpdated', function(newPosition) {
+    $scope.currentPosition = newPosition;
     $scope.$apply();
-  }, function(error) {
-    alert('position error', error);
   });
+  Locator.init();
 
   $scope.$watch('currentPosition', function(newPosition) {
     if (!newPosition || !newPosition.coords) {
@@ -24,6 +23,10 @@ angular.module('starter.controllers', [])
   $scope.$watch('selectedLine', function(newLine) {
     $scope.activeStops = subwayStops[$scope.selectedLine];
   });
+
+  $scope.stopTapped = function(stop) {
+    alert(stop);
+  };
 })
 
 .controller('FriendsCtrl', function($scope, Friends) {
