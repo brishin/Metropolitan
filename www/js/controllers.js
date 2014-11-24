@@ -25,7 +25,8 @@ angular.module('starter.controllers', [])
   });
 
   $scope.stopTapped = function(stop) {
-    alert(stop);
+    console.log('stopTapped', stop);
+    var promise = Locator.getPosition();
   };
 })
 

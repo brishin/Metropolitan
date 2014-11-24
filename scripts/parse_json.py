@@ -25,7 +25,6 @@ def group_stops(stops):
         line = stop['stationId'][0]
         number = stop['stationId'][1:]
 
-        new_stop.pop('stationId', None)
         new_stop['number'] = number
 
         grouped[line].append(new_stop)
