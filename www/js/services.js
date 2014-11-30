@@ -56,7 +56,7 @@ angular.module('starter.services', ['firebase'])
       d.reject(error);
     });
 
-    return d;
+    return d.promise;
   };
 
   Locator.prototype._handleLocationError = function(error) {
