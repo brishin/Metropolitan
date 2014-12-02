@@ -15,10 +15,6 @@ def munge_data(data):
 def calc_distance(all_measured, all_actual):
     distances = []
     for measured, actual in itertools.izip(all_measured, all_actual):
-        lat_delta = measured.lat - actual.lat
-        long_delta = measured.long - actual.long
-        distance = lat_delta ** 2 + long_delta ** 2
-
         # Convert all to radians
         lon1, lat1, lon2, lat2 = map(radians, [measured.long, measured.lat,
                 actual.long, actual.lat])
