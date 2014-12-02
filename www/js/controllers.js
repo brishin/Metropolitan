@@ -40,6 +40,7 @@ angular.module('starter.controllers', [])
             var sync = $firebase(ref);
             sync.$push(data);
             console.log(data);
+            alert("Location sent.")
         }
     );
   };
